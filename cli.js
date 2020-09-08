@@ -4,7 +4,7 @@ import { readFileSync } from 'fs'
 
 const exec = str => {
   const [cmd, ...args] = str.split(' ')
-  spawnSync(cmd, args, { stdio: 'inherit' })
+  return spawnSync(cmd, args, { stdio: 'inherit' })
 }
 
 const pkg = JSON.parse(readFileSync(process.cwd() + '/package.json'))
@@ -19,4 +19,4 @@ const run = () => {
   return exec('npm test')
 }
 
-run()
+process.exit(run().status)
